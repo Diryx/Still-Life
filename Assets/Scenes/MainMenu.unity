@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 108180985}
   - component: {fileID: 108180984}
   - component: {fileID: 108180987}
+  - component: {fileID: 108180988}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -593,6 +594,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 10
+  _shadowNormalStrength: 5
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: 1}
+  _animBoolParam: 
+  _useAnimation: 1
   _switchMenu: 0
   _menu:
   - {fileID: 1136870836}
@@ -741,6 +748,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &108180988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108180982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &116699047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1024,7 @@ GameObject:
   - component: {fileID: 175149189}
   - component: {fileID: 175149188}
   - component: {fileID: 175149191}
+  - component: {fileID: 175149192}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -1043,6 +1066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ActiveButton
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 10
+  _shadowNormalStrength: 5
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: 1}
+  _animBoolParam: 
+  _useAnimation: 1
   _active: 2
   _sceneReference:
     _sceneType: 0
@@ -1128,6 +1157,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &175149192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175149186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &198875819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,148 +1564,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &348260303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 348260304}
-  - component: {fileID: 348260307}
-  - component: {fileID: 348260306}
-  - component: {fileID: 348260305}
-  - component: {fileID: 348260308}
-  m_Layer: 5
-  m_Name: Extra
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &348260304
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348260303}
-  m_LocalRotation: {x: -0, y: -0, z: 0.38561657, w: 0.92265916}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7040749, y: 4.172236, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1655510713}
-  m_Father: {fileID: 1136870837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.364}
-  m_AnchorMin: {x: 0.526, y: 0.02314815}
-  m_AnchorMax: {x: 0.81100005, y: 0.4645556}
-  m_AnchoredPosition: {x: -2, y: -1.5}
-  m_SizeDelta: {x: -7.315979, y: -2.3770142}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &348260305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348260303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4b36f380767a1d40823b2f79919c8f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
-  _sfxIndexClick: 0
-  _sfxIndexPointerEnter: 1
-  _switchMenu: 3
-  _menu:
-  - {fileID: 1136870836}
-  - {fileID: 401764943}
-  - {fileID: 1349025788}
-  - {fileID: 859350070}
---- !u!114 &348260306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348260303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.13510145, g: 0.36055025, b: 0.41509432, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &348260307
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348260303}
-  m_CullTransparentMesh: 1
---- !u!114 &348260308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348260303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 348260306}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &364381430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,6 +2857,7 @@ GameObject:
   - component: {fileID: 761031898}
   - component: {fileID: 761031900}
   - component: {fileID: 761031901}
+  - component: {fileID: 761031902}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2979,7 +2882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.364}
   m_AnchorMin: {x: 0.033125, y: 0}
   m_AnchorMax: {x: 0.31500003, y: 0.3962963}
-  m_AnchoredPosition: {x: -0.5, y: -25.5}
+  m_AnchoredPosition: {x: -0.5, y: -25.500122}
   m_SizeDelta: {x: -1.315979, y: 46.622986}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &761031898
@@ -3034,6 +2937,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 10
+  _shadowNormalStrength: 5
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: 1}
+  _animBoolParam: 
+  _useAnimation: 1
   _switchMenu: 1
   _menu:
   - {fileID: 1136870836}
@@ -3082,6 +2991,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &761031902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761031896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &764959374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3521,8 +3445,9 @@ GameObject:
   - component: {fileID: 1060734629}
   - component: {fileID: 1060734631}
   - component: {fileID: 1060734630}
-  - component: {fileID: 1060734632}
   - component: {fileID: 1060734633}
+  - component: {fileID: 1060734634}
+  - component: {fileID: 1060734632}
   m_Layer: 5
   m_Name: Chapters
   m_TagString: Untagged
@@ -3602,6 +3527,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 10
+  _shadowNormalStrength: 5
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: -1}
+  _animBoolParam: 
+  _useAnimation: 1
   _switchMenu: 2
   _menu:
   - {fileID: 1136870836}
@@ -3651,6 +3582,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1060734634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060734628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1117709862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3664,6 +3610,7 @@ GameObject:
   - component: {fileID: 1117709865}
   - component: {fileID: 1117709864}
   - component: {fileID: 1117709867}
+  - component: {fileID: 1117709868}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -3704,6 +3651,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 10
+  _shadowNormalStrength: 5
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: 1}
+  _animBoolParam: 
+  _useAnimation: 1
   _switchMenu: 0
   _menu:
   - {fileID: 1136870836}
@@ -3852,6 +3805,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1117709868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117709862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1136870836
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,7 +3851,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 175149187}
-  - {fileID: 348260304}
+  - {fileID: 1198670582}
   - {fileID: 1060734629}
   - {fileID: 761031897}
   - {fileID: 2058945997}
@@ -4210,6 +4178,191 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195148495}
   m_CullTransparentMesh: 1
+--- !u!1 &1198670581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198670582}
+  - component: {fileID: 1198670584}
+  - component: {fileID: 1198670583}
+  - component: {fileID: 1198670586}
+  - component: {fileID: 1198670588}
+  - component: {fileID: 1198670587}
+  - component: {fileID: 1198670585}
+  m_Layer: 5
+  m_Name: Extra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1198670582
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_LocalRotation: {x: -0, y: -0, z: 0.39693776, w: 0.91784555}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1655510713}
+  m_Father: {fileID: 1136870837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 46.774}
+  m_AnchorMin: {x: 0.47972924, y: 0}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -51, y: -354.98096}
+  m_SizeDelta: {x: 23.666016, y: 1032.4381}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1198670583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5c8bb84babf6f9d4baf4825fcac85931, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1198670584
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_CullTransparentMesh: 1
+--- !u!114 &1198670585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b36f380767a1d40823b2f79919c8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuSwitcher
+  _sfxIndexClick: 0
+  _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 14
+  _shadowNormalStrength: 7
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: 1}
+  _animBoolParam: Hover
+  _useAnimation: 1
+  _switchMenu: 1
+  _menu:
+  - {fileID: 1136870836}
+  - {fileID: 859350070}
+--- !u!114 &1198670586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1198670583}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!95 &1198670587
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c1b8b9c9cebcfd4a862312034492f8a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1198670588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198670581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_EffectDistance: {x: 7, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1209142180
 GameObject:
   m_ObjectHideFlags: 0
@@ -5161,15 +5314,15 @@ RectTransform:
   m_GameObject: {fileID: 1655510712}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3527969, y: 0.7772253, z: 1}
+  m_LocalScale: {x: 1.4719524, y: 1.3244506, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 348260304}
+  m_Father: {fileID: 1198670582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
-  m_AnchorMin: {x: 0.78859097, y: 0.36478364}
-  m_AnchorMax: {x: 0.94100004, y: 0.7045408}
-  m_AnchoredPosition: {x: 0.61901855, y: 0.5189972}
-  m_SizeDelta: {x: 368.756, y: -59.158}
+  m_AnchorMin: {x: 0.808, y: 0.5713336}
+  m_AnchorMax: {x: 0.938, y: 0.94446653}
+  m_AnchoredPosition: {x: 1.5, y: -0.000061035156}
+  m_SizeDelta: {x: 243.59665, y: -461.70935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1655510714
 MonoBehaviour:
@@ -5200,8 +5353,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283914071
+  m_fontColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5284,6 +5437,7 @@ GameObject:
   - component: {fileID: 1771122419}
   - component: {fileID: 1771122421}
   - component: {fileID: 1771122422}
+  - component: {fileID: 1771122423}
   m_Layer: 5
   m_Name: Lamp
   m_TagString: Untagged
@@ -5406,11 +5560,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ThemeToggleButton
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 3
+  _shadowNormalStrength: 1
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: 1}
+  _animBoolParam: 
+  _useAnimation: 1
   _lampImage: {fileID: 1771122419}
   _lightLampSprite: {fileID: 21300000, guid: 6f7860b7ed70515499128a9f47b45f06, type: 3}
   _darkLampSprite: {fileID: 21300000, guid: d74816724f3a673499524a470707ad79, type: 3}
   _lightVersion: {fileID: 251282371}
   _darkVersion: {fileID: 1796692128}
+--- !u!114 &1771122423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771122416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1775748153
 GameObject:
   m_ObjectHideFlags: 0
@@ -6024,8 +6199,9 @@ GameObject:
   - component: {fileID: 2058945997}
   - component: {fileID: 2058945999}
   - component: {fileID: 2058945998}
-  - component: {fileID: 2058946000}
   - component: {fileID: 2058946001}
+  - component: {fileID: 2058946002}
+  - component: {fileID: 2058946000}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -6105,6 +6281,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ActiveButton
   _sfxIndexClick: 0
   _sfxIndexPointerEnter: 1
+  _shadowHoverStrength: 14
+  _shadowNormalStrength: 7
+  _shadowDuration: 0.2
+  _shadowDirection: {x: 1, y: -1}
+  _animBoolParam: 
+  _useAnimation: 1
   _active: 1
   _sceneReference:
     _sceneType: 1
@@ -6152,6 +6334,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2058946002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058945996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -7}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2063331378
 GameObject:
   m_ObjectHideFlags: 0

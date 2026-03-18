@@ -4,15 +4,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(Button), typeof(Shadow))]
 public class ButtonParent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private int _sfxIndexClick = 0;
-    [SerializeField] private int _sfxIndexPointerEnter = 1;
+    [SerializeField] private int _sfxIndexPointerEnter = 1; 
+    [SerializeField] private float _shadowHoverStrength = 10f;
+    [SerializeField] private float _shadowNormalStrength = 5f;
+    [SerializeField] private float _shadowDuration = 0.2f;
+    [SerializeField] private Vector2 _shadowDirection = new Vector2(1, 1);
+    [SerializeField] private string _animBoolParam = "";
+    [SerializeField] private bool _useAnimation = true;
 
     protected Button _button;
+    protected Shadow _shadow;
     protected RectTransform _rectTransform;
     protected AudioManager _audioManager;
+    private Animator _animator;
     protected bool _isPointerOver = false;
     private Vector3 _originalScale;
 
@@ -22,49 +30,56 @@ public class ButtonParent : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     protected virtual void Awake()
     {
         _button = GetComponent<Button>();
+        _shadow = GetComponent<Shadow>();
         _rectTransform = GetComponent<RectTransform>();
+        _animator = GetComponent<Animator>();
         _originalScale = _rectTransform.localScale;
     }
 
     protected virtual void Start()
     {
-        if (_button != null)
-            _button.onClick.AddListener(ButtonAction);
+        _button.onClick.AddListener(ButtonAction);
+        _shadow.effectDistance = _shadowDirection * _shadowNormalStrength;
+
+        if (_animator != null && _useAnimation)
+            _animator.SetBool(_animBoolParam, false);
     }
 
     protected virtual void ButtonAction() => _audioManager.PlayUISFX(_sfxIndexClick);
 
-    private void OnEnable()
-    {
-        if (_button != null)
-            _button.onClick.AddListener(ButtonAction);
-    }
+    private void OnEnable() => _button.onClick.AddListener(ButtonAction);
 
     private void OnDisable()
     {
-        if (_button != null)
-            _button.onClick.RemoveListener(ButtonAction);
-
-        if (_rectTransform != null)
-            _rectTransform.DOKill();
-
+        _button.onClick.RemoveListener(ButtonAction);
+        _rectTransform.DOKill();
         _isPointerOver = false;
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        if (_rectTransform == null) return;
+        DOTween.To(() => _shadow.effectDistance,
+            x => _shadow.effectDistance = x,
+            _shadowDirection * _shadowHoverStrength,
+            _shadowDuration);
 
-        _audioManager.PlayUISFX(_sfxIndexPointerEnter);
-        _isPointerOver = true;
-        _rectTransform.DOScale(_originalScale * 1.05f, 0.2f);
+        _audioManager?.PlayUISFX(_sfxIndexPointerEnter);
+        _rectTransform.DOScale(_originalScale * 1.05f, _shadowDuration);
+
+        if (_animator != null && _useAnimation)
+            _animator.SetBool(_animBoolParam, true);
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (_rectTransform == null) return;
+        DOTween.To(() => _shadow.effectDistance,
+            x => _shadow.effectDistance = x,
+            _shadowDirection * _shadowNormalStrength,
+            _shadowDuration);
 
-        _isPointerOver = false;
-        _rectTransform.DOScale(_originalScale, 0.2f);
+        _rectTransform.DOScale(_originalScale, _shadowDuration);
+
+        if (_animator != null && _useAnimation)
+            _animator.SetBool(_animBoolParam, false);
     }
 }
