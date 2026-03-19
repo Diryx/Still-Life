@@ -1,17 +1,20 @@
 ﻿using UnityEngine.SceneManagement;
 
-public class SceneController
+namespace Infrastructure.Controllers
 {
-    private int _currentSceneIndex;
-
-    public SceneController() => _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-    public void LoadScene(int sceneIndex)
+    public class SceneController
     {
-        if (sceneIndex != _currentSceneIndex)
+        private int _currentSceneIndex;
+
+        public SceneController() => _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        public void LoadScene(int sceneIndex)
         {
-            SceneManager.LoadScene(sceneIndex);
-            _currentSceneIndex = sceneIndex;
+            if (sceneIndex != _currentSceneIndex)
+            {
+                SceneManager.LoadScene(sceneIndex);
+                _currentSceneIndex = sceneIndex;
+            }
         }
     }
 }

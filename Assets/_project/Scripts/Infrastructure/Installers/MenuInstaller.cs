@@ -1,8 +1,11 @@
 using Zenject;
 
-public class MenuInstaller : MonoInstaller
+namespace Infrastructure.GameData
 {
-    public override void InstallBindings()
+    public class MenuInstaller : MonoInstaller
     {
+        public override void InstallBindings()
+        {
+        }
     }
 }

@@ -1,22 +1,26 @@
 using UnityEngine;
 using Zenject;
+using static Zenject.CheatSheet;
 
-public class HouseInstaller : MonoInstaller
+namespace Infrastructure.GameData
 {
-    [SerializeField] private Movement _movement;
-    [SerializeField] private CameraController _cam;
-    [SerializeField] private Camera _cameraMain;
-    [SerializeField] private PlayerInteraction _playerInteraction;
-    [SerializeField] private ImageDisplayManager _imageDisplayManager;
-    [SerializeField] private PauseMenu _pauseMenu;
-
-    public override void InstallBindings()
+    public class HouseInstaller : MonoInstaller
     {
-        Container.Bind<Movement>().FromInstance(_movement).AsSingle();
-        Container.Bind<CameraController>().FromInstance(_cam).AsSingle();
-        Container.Bind<Camera>().FromInstance(_cameraMain).AsSingle();
-        Container.Bind<PlayerInteraction>().FromInstance(_playerInteraction).AsSingle();
-        Container.Bind<ImageDisplayManager>().FromInstance(_imageDisplayManager).AsSingle();
-        Container.Bind<PauseMenu>().FromInstance(_pauseMenu).AsSingle();
+        [SerializeField] private Player.Movement _movement;
+        [SerializeField] private Player.CameraController _cam;
+        [SerializeField] private Camera _cameraMain;
+        [SerializeField] private Player.PlayerInteraction _playerInteraction;
+        [SerializeField] private UI.Panels.ImageDisplayManager _imageDisplayManager;
+        [SerializeField] private UI.Panels.PauseMenu _pauseMenu;
+
+        public override void InstallBindings()
+        {
+            Container.Bind<Player.Movement>().FromInstance(_movement).AsSingle();
+            Container.Bind<Player.CameraController>().FromInstance(_cam).AsSingle();
+            Container.Bind<Camera>().FromInstance(_cameraMain).AsSingle();
+            Container.Bind<Player.PlayerInteraction>().FromInstance(_playerInteraction).AsSingle();
+            Container.Bind<UI.Panels.ImageDisplayManager>().FromInstance(_imageDisplayManager).AsSingle();
+            Container.Bind<UI.Panels.PauseMenu>().FromInstance(_pauseMenu).AsSingle();
+        }
     }
 }

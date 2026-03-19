@@ -1,99 +1,103 @@
-﻿using System;
+﻿using Infrastructure.GameData;
+using System;
 using System.IO;
-using Zenject;
 using UnityEngine;
+using Zenject;
 
-public class SettingsManager : IInitializable, IDisposable
+namespace Infrastructure.Controllers
 {
-    private SettingsData _settings;
-    private string _filePath;
-    private bool _isInitialized = false;
-
-    public event Action<float> OnMasterVolumeChanged;
-    public event Action<float> OnMusicVolumeChanged;
-    public event Action<float> OnSFXVolumeChanged;
-
-    public SettingsData CurrentSettings => _settings;
-
-    [Inject]
-    private void Construct() => _filePath = Path.Combine(Application.streamingAssetsPath, "Settings.json");
-
-    public void Initialize()
+    public class SettingsManager : IInitializable, IDisposable
     {
-        if (_isInitialized) return;
+        private SettingsData _settings;
+        private string _filePath;
+        private bool _isInitialized = false;
 
-        LoadSettings();
-        _isInitialized = true;
+        public event Action<float> OnMasterVolumeChanged;
+        public event Action<float> OnMusicVolumeChanged;
+        public event Action<float> OnSFXVolumeChanged;
 
-        OnMasterVolumeChanged?.Invoke(_settings.masterVolume);
-        OnMusicVolumeChanged?.Invoke(_settings.musicVolume);
-        OnSFXVolumeChanged?.Invoke(_settings.sfxVolume);
-    }
+        public SettingsData CurrentSettings => _settings;
 
-    public void LoadSettings()
-    {
-        try
+        [Inject]
+        private void Construct() => _filePath = Path.Combine(Application.streamingAssetsPath, "Settings.json");
+
+        public void Initialize()
         {
-            if (File.Exists(_filePath))
+            if (_isInitialized) return;
+
+            LoadSettings();
+            _isInitialized = true;
+
+            OnMasterVolumeChanged?.Invoke(_settings.masterVolume);
+            OnMusicVolumeChanged?.Invoke(_settings.musicVolume);
+            OnSFXVolumeChanged?.Invoke(_settings.sfxVolume);
+        }
+
+        public void LoadSettings()
+        {
+            try
             {
-                string json = File.ReadAllText(_filePath);
-                _settings = JsonUtility.FromJson<SettingsData>(json);
+                if (File.Exists(_filePath))
+                {
+                    string json = File.ReadAllText(_filePath);
+                    _settings = JsonUtility.FromJson<SettingsData>(json);
+                }
+                else
+                {
+                    _settings = new SettingsData();
+                    SaveSettings();
+                }
             }
-            else
+            catch (Exception e)
             {
+                Debug.LogError($"Failed to load settings: {e.Message}");
                 _settings = new SettingsData();
+            }
+        }
+
+        public void SaveSettings()
+        {
+            try
+            {
+                string json = JsonUtility.ToJson(_settings, true);
+                File.WriteAllText(_filePath, json);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to save settings: {e.Message}");
+            }
+        }
+
+        public void SetMasterVolume(float value)
+        {
+            if (_settings.masterVolume != value)
+            {
+                _settings.masterVolume = value;
+                OnMasterVolumeChanged?.Invoke(value);
                 SaveSettings();
             }
         }
-        catch (Exception e)
-        {
-            Debug.LogError($"Failed to load settings: {e.Message}");
-            _settings = new SettingsData();
-        }
-    }
 
-    public void SaveSettings()
-    {
-        try
+        public void SetMusicVolume(float value)
         {
-            string json = JsonUtility.ToJson(_settings, true);
-            File.WriteAllText(_filePath, json);
+            if (_settings.musicVolume != value)
+            {
+                _settings.musicVolume = value;
+                OnMusicVolumeChanged?.Invoke(value);
+                SaveSettings();
+            }
         }
-        catch (Exception e)
-        {
-            Debug.LogError($"Failed to save settings: {e.Message}");
-        }
-    }
 
-    public void SetMasterVolume(float value)
-    {
-        if (_settings.masterVolume != value)
+        public void SetSFXVolume(float value)
         {
-            _settings.masterVolume = value;
-            OnMasterVolumeChanged?.Invoke(value);
-            SaveSettings();
+            if (_settings.sfxVolume != value)
+            {
+                _settings.sfxVolume = value;
+                OnSFXVolumeChanged?.Invoke(value);
+                SaveSettings();
+            }
         }
-    }
 
-    public void SetMusicVolume(float value)
-    {
-        if (_settings.musicVolume != value)
-        {
-            _settings.musicVolume = value;
-            OnMusicVolumeChanged?.Invoke(value);
-            SaveSettings();
-        }
+        public void Dispose() => SaveSettings();
     }
-
-    public void SetSFXVolume(float value)
-    {
-        if (_settings.sfxVolume != value)
-        {
-            _settings.sfxVolume = value;
-            OnSFXVolumeChanged?.Invoke(value);
-            SaveSettings();
-        }
-    }
-
-    public void Dispose() => SaveSettings();
 }

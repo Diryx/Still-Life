@@ -2,22 +2,25 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Zenject;
 
-public class ProjectInstaller : MonoInstaller
+namespace Infrastructure.GameData
 {
-    [SerializeField] private AudioMixer _audioMixer;
-    [SerializeField] private AudioStorageSO _audioStorage;
-    [SerializeField] private AudioSource _musicSource;
-    [SerializeField] private AudioSource _sfxSource;
-
-    public override void InstallBindings()
+    public class ProjectInstaller : MonoInstaller
     {
-        Container.BindInterfacesAndSelfTo<SettingsManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<AudioManager>().AsSingle().NonLazy();
-        Container.Bind<GameEvents>().AsSingle();
-        Container.Bind<SceneController>().AsSingle().NonLazy();
-        Container.BindInstance(_audioMixer).AsSingle();
-        Container.BindInstance(_audioStorage).AsSingle();
-        Container.BindInstance(_musicSource).WithId("MusicSource");
-        Container.BindInstance(_sfxSource).WithId("SFXSource");
+        [SerializeField] private AudioMixer _audioMixer;
+        [SerializeField] private SO.AudioStorageSO _audioStorage;
+        [SerializeField] private AudioSource _musicSource;
+        [SerializeField] private AudioSource _sfxSource;
+
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesAndSelfTo<Controllers.SettingsManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<Controllers.AudioManager>().AsSingle().NonLazy();
+            Container.Bind<GameEvents>().AsSingle();
+            Container.Bind<Controllers.SceneController>().AsSingle().NonLazy();
+            Container.BindInstance(_audioMixer).AsSingle();
+            Container.BindInstance(_audioStorage).AsSingle();
+            Container.BindInstance(_musicSource).WithId("MusicSource");
+            Container.BindInstance(_sfxSource).WithId("SFXSource");
+        }
     }
 }

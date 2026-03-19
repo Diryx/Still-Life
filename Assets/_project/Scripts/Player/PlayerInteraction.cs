@@ -2,74 +2,77 @@
 using UnityEngine;
 using Zenject;
 
-public class PlayerInteraction : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private float _maxDistance = 3f;
-    [SerializeField] private LayerMask _interactableMask;
-    [SerializeField] private KeyCode _interactKey = KeyCode.E;
-    [SerializeField] private TMP_Text _promptText;
-
-    private Camera _cam;
-    private GameEvents _gameEvents;
-    private BaseInteractable _currentInteractable;
-
-    private bool _isUIOpen = false;
-
-    [Inject]
-    private void Construct(Camera mainCamera, GameEvents gameEvents)
+    public class PlayerInteraction : MonoBehaviour
     {
-        _cam = mainCamera;
-        _gameEvents = gameEvents;
+        [SerializeField] private float _maxDistance = 3f;
+        [SerializeField] private LayerMask _interactableMask;
+        [SerializeField] private KeyCode _interactKey = KeyCode.E;
+        [SerializeField] private TMP_Text _promptText;
 
-        _gameEvents.OnUIOpened += () => _isUIOpen = true;
-        _gameEvents.OnUIClosed += () => _isUIOpen = false;
-    }
+        private Camera _cam;
+        private Infrastructure.GameEvents _gameEvents;
+        private Interaction.BaseInteractable _currentInteractable;
 
-    private void Update()
-    {
-        if (_isUIOpen) return;
+        private bool _isUIOpen = false;
 
-        CheckInteractable();
-
-        if (_currentInteractable != null && Input.GetKeyDown(_interactKey))
+        [Inject]
+        private void Construct(Camera mainCamera, Infrastructure.GameEvents gameEvents)
         {
-            _currentInteractable.Interact();
+            _cam = mainCamera;
+            _gameEvents = gameEvents;
+
+            _gameEvents.OnUIOpened += () => _isUIOpen = true;
+            _gameEvents.OnUIClosed += () => _isUIOpen = false;
         }
-    }
 
-    private void CheckInteractable()
-    {
-        Ray ray = _cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance, _interactableMask))
+        private void Update()
         {
-            BaseInteractable interactable = hit.collider.GetComponent<BaseInteractable>();
-            if (interactable != null && interactable.CanInteract)
+            if (_isUIOpen) return;
+
+            CheckInteractable();
+
+            if (_currentInteractable != null && Input.GetKeyDown(_interactKey))
             {
-                if (_currentInteractable != interactable)
-                {
-                    _currentInteractable = interactable;
-                    ShowPrompt(interactable.InteractionPrompt);
-                }
-                return;
+                _currentInteractable.Interact();
             }
         }
 
-        _currentInteractable = null;
-        HidePrompt();
-    }
-
-    private void ShowPrompt(string text)
-    {
-        if (_promptText != null)
+        private void CheckInteractable()
         {
-            _promptText.text = text;
-            _promptText.gameObject.SetActive(true);
-        }
-    }
+            Ray ray = _cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance, _interactableMask))
+            {
+                Interaction.BaseInteractable interactable = hit.collider.GetComponent<Interaction.BaseInteractable>();
+                if (interactable != null && interactable.CanInteract)
+                {
+                    if (_currentInteractable != interactable)
+                    {
+                        _currentInteractable = interactable;
+                        ShowPrompt(interactable.InteractionPrompt);
+                    }
+                    return;
+                }
+            }
 
-    private void HidePrompt()
-    {
-        if (_promptText != null)
-            _promptText.gameObject.SetActive(false);
+            _currentInteractable = null;
+            HidePrompt();
+        }
+
+        private void ShowPrompt(string text)
+        {
+            if (_promptText != null)
+            {
+                _promptText.text = text;
+                _promptText.gameObject.SetActive(true);
+            }
+        }
+
+        private void HidePrompt()
+        {
+            if (_promptText != null)
+                _promptText.gameObject.SetActive(false);
+        }
     }
 }

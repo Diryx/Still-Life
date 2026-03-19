@@ -2,43 +2,46 @@
 using UnityEngine.UI;
 using Zenject;
 
-public class ImageDisplayManager : MonoBehaviour
+namespace UI.Panels
 {
-    [SerializeField] private Image _image;
-    [SerializeField] private GameObject _imagePanel;
-    [SerializeField] private KeyCode _closeKey = KeyCode.E;
-
-    private GameEvents _gameEvents;
-    private bool _isDisplaying = false;
-
-    [Inject]
-    private void Construct(GameEvents gameEvents)
+    public class ImageDisplayManager : MonoBehaviour
     {
-        _gameEvents = gameEvents;
-    }
+        [SerializeField] private Image _image;
+        [SerializeField] private GameObject _imagePanel;
+        [SerializeField] private KeyCode _closeKey = KeyCode.E;
 
-    private void Update()
-    {
-        if (_isDisplaying && Input.GetKeyDown(_closeKey))
-            HideNote();
-    }
+        private Infrastructure.GameEvents _gameEvents;
+        private bool _isDisplaying = false;
 
-    public void ShowNote(Sprite sprite)
-    {
-        if (sprite == null) return;
+        [Inject]
+        private void Construct(Infrastructure.GameEvents gameEvents)
+        {
+            _gameEvents = gameEvents;
+        }
 
-        _image.sprite = sprite;
-        _imagePanel.SetActive(true);
-        _gameEvents.UIOpened();
+        private void Update()
+        {
+            if (_isDisplaying && Input.GetKeyDown(_closeKey))
+                HideNote();
+        }
 
-        _isDisplaying = true;
-    }
+        public void ShowNote(Sprite sprite)
+        {
+            if (sprite == null) return;
 
-    public void HideNote()
-    {
-        _imagePanel.SetActive(false);
-        _gameEvents.UIClosed();
+            _image.sprite = sprite;
+            _imagePanel.SetActive(true);
+            _gameEvents.UIOpened();
 
-        _isDisplaying = false;
+            _isDisplaying = true;
+        }
+
+        public void HideNote()
+        {
+            _imagePanel.SetActive(false);
+            _gameEvents.UIClosed();
+
+            _isDisplaying = false;
+        }
     }
 }

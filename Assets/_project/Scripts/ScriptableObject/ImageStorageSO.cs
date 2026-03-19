@@ -1,14 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ImageStorage", menuName = "Game/Image Storage")]
-public class ImageStorageSO : ScriptableObject
+namespace Infrastructure.SO
 {
-    [SerializeField] private Sprite[] _noteSprites;
-
-    public Sprite GetNoteSprite(int index)
+    [CreateAssetMenu(fileName = "ImageStorage", menuName = "Game/Image Storage")]
+    public class ImageStorageSO : ScriptableObject
     {
-        if (index >= 0 && index < _noteSprites.Length)
-            return _noteSprites[index];
-        return null;
+        [SerializeField] private Sprite[] _noteSprites;
+
+        public Sprite GetNoteSprite(int index)
+        {
+            if (index >= 0 && index < _noteSprites.Length)
+                return _noteSprites[index];
+            return null;
+        }
     }
 }

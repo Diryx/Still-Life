@@ -1,16 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-public class ActiveButton : ButtonParent
+namespace UI.Buttons
+{
+    public class ActiveButton : ButtonParent
 {
     [SerializeField] private Active _active;
-    [SerializeField] private SceneReference _sceneReference;
+    [SerializeField] private Infrastructure.SceneReference _sceneReference;
 
-    private SceneController _sceneController;
-    private PauseMenu _pauseMenu;
+    private Infrastructure.Controllers.SceneController _sceneController;
+    private Panels.PauseMenu _pauseMenu;
 
     [Inject]
-    private void Construct(SceneController sceneController, [InjectOptional] PauseMenu pauseMenu)
+    private void Construct(Infrastructure.Controllers.SceneController sceneController, [InjectOptional] Panels.PauseMenu pauseMenu)
     {
         _sceneController = sceneController;
         _pauseMenu = pauseMenu;
@@ -47,4 +49,5 @@ public class ActiveButton : ButtonParent
     private void ChangeScene() => _sceneController.LoadScene(_sceneReference.SceneIndex);
     private void ExitGame() => Application.Quit();
     private void ContinueGame() => _pauseMenu.Unpause();
+}
 }

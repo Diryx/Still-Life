@@ -1,31 +1,32 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class ImageItem : BaseInteractable
+namespace Interaction.Object
 {
-    [Header("Note Settings")]
-    [SerializeField] private ImageStorageSO _imageStorage;
-    [SerializeField] private int _imageIndex;
-    [SerializeField] private bool _destroyOnRead = true;
-
-    private ImageDisplayManager _displayManager;
-
-    [Inject]
-    private void Construct(ImageDisplayManager displayManager) => _displayManager = displayManager;
-
-    public override string InteractionPrompt => _prompt;
-
-    public override void Interact()
+    public class ImageItem : BaseInteractable
     {
-        if (!CanInteract) return;
+        [SerializeField] private Infrastructure.SO.ImageStorageSO _imageStorage;
+        [SerializeField] private int _imageIndex;
+        [SerializeField] private bool _destroyOnRead = true;
 
-        Sprite imageSprite = _imageStorage.GetNoteSprite(_imageIndex);
-        if (imageSprite != null)
+        private UI.Panels.ImageDisplayManager _displayManager;
+
+        [Inject]
+        private void Construct(UI.Panels.ImageDisplayManager displayManager)
+            => _displayManager = displayManager;
+
+        public override string InteractionPrompt => _prompt;
+
+        public override void Interact()
         {
-            _displayManager.ShowNote(imageSprite);
-        }
+            if (!CanInteract) return;
 
-        if (_destroyOnRead)
-            Destroy(gameObject);
+            Sprite imageSprite = _imageStorage.GetNoteSprite(_imageIndex);
+            if (imageSprite != null)
+                _displayManager.ShowNote(imageSprite);
+
+            if (_destroyOnRead)
+                Destroy(gameObject);
+        }
     }
 }

@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class Interfaces : MonoBehaviour
+namespace Infrastructure
 {
+    public class Interfaces : MonoBehaviour
+    {
 
+    }
 }

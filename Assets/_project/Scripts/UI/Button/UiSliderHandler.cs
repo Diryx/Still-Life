@@ -1,139 +1,143 @@
-﻿using UnityEngine;
+﻿using Infrastructure.Controllers;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-[RequireComponent(typeof(Slider))]
-public class UISliderHandler : MonoBehaviour
+namespace UI.Sliders
 {
-    [SerializeField] private VolumeType _volumeType;
-
-    private Slider _slider;
-    private SettingsManager _settingsManager;
-    private AudioManager _audioManager;
-
-    public enum VolumeType
+    [RequireComponent(typeof(Slider))]
+    public class UISliderHandler : MonoBehaviour
     {
-        Master,
-        Music,
-        SFX
-    }
+        [SerializeField] private VolumeType _volumeType;
 
-    [Inject]
-    private void Construct(SettingsManager settingsManager, AudioManager audioManager)
-    {
-        _settingsManager = settingsManager;
-        _audioManager = audioManager;
-    }
+        private Slider _slider;
+        private SettingsManager _settingsManager;
+        private AudioManager _audioManager;
 
-    private void Awake() => _slider = GetComponent<Slider>();
-
-    private void Start()
-    {
-        switch (_volumeType)
+        public enum VolumeType
         {
-            case VolumeType.Master:
-                _settingsManager.OnMasterVolumeChanged += UpdateSliderValue;
-                break;
-            case VolumeType.Music:
-                _settingsManager.OnMusicVolumeChanged += UpdateSliderValue;
-                break;
-            case VolumeType.SFX:
-                _settingsManager.OnSFXVolumeChanged += UpdateSliderValue;
-                break;
+            Master,
+            Music,
+            SFX
         }
 
-        InitializeSlider();
-    }
-
-    private void InitializeSlider()
-    {
-        float initialValue = GetCurrentVolume();
-
-        _slider.SetValueWithoutNotify(initialValue);
-        _slider.onValueChanged.AddListener(OnSliderValueChanged);
-    }
-
-    private void UpdateSliderValue(float newValue) => _slider.SetValueWithoutNotify(newValue);
-
-
-    private void OnSliderValueChanged(float value)
-    {
-        Debug.Log($"OnSliderValueChanged: {_volumeType} = {value}");
-
-        switch (_volumeType)
+        [Inject]
+        private void Construct(SettingsManager settingsManager, AudioManager audioManager)
         {
-            case VolumeType.Master:
-                _settingsManager.SetMasterVolume(value);
-                break;
-            case VolumeType.Music:
-                _settingsManager.SetMusicVolume(value);
-                break;
-            case VolumeType.SFX:
-                _settingsManager.SetSFXVolume(value);
-                break;
-        }
-    }
-
-    private float GetCurrentVolume()
-    {
-        return _volumeType switch
-        {
-            VolumeType.Master => _settingsManager.CurrentSettings.masterVolume,
-            VolumeType.Music => _settingsManager.CurrentSettings.musicVolume,
-            VolumeType.SFX => _settingsManager.CurrentSettings.sfxVolume,
-            _ => 1f
-        };
-    }
-
-    private void OnEnable()
-    {
-        switch (_volumeType)
-        {
-            case VolumeType.Master:
-                _settingsManager.OnMasterVolumeChanged += UpdateSliderValue;
-                break;
-            case VolumeType.Music:
-                _settingsManager.OnMusicVolumeChanged += UpdateSliderValue;
-                break;
-            case VolumeType.SFX:
-                _settingsManager.OnSFXVolumeChanged += UpdateSliderValue;
-                break;
-        }
-    }
-
-    private void OnDisable()
-    {
-        switch (_volumeType)
-        {
-            case VolumeType.Master:
-                _settingsManager.OnMasterVolumeChanged -= UpdateSliderValue;
-                break;
-            case VolumeType.Music:
-                _settingsManager.OnMusicVolumeChanged -= UpdateSliderValue;
-                break;
-            case VolumeType.SFX:
-                _settingsManager.OnSFXVolumeChanged -= UpdateSliderValue;
-                break;
+            _settingsManager = settingsManager;
+            _audioManager = audioManager;
         }
 
-        _slider.onValueChanged.RemoveListener(OnSliderValueChanged);
-    }
+        private void Awake() => _slider = GetComponent<Slider>();
 
-    private void OnDestroy()
-    {
-        switch (_volumeType)
+        private void Start()
         {
-            case VolumeType.Master:
-                _settingsManager.OnMasterVolumeChanged -= UpdateSliderValue;
-                break;
-            case VolumeType.Music:
-                _settingsManager.OnMusicVolumeChanged -= UpdateSliderValue;
-                break;
-            case VolumeType.SFX:
-                _settingsManager.OnSFXVolumeChanged -= UpdateSliderValue;
-                break;
+            switch (_volumeType)
+            {
+                case VolumeType.Master:
+                    _settingsManager.OnMasterVolumeChanged += UpdateSliderValue;
+                    break;
+                case VolumeType.Music:
+                    _settingsManager.OnMusicVolumeChanged += UpdateSliderValue;
+                    break;
+                case VolumeType.SFX:
+                    _settingsManager.OnSFXVolumeChanged += UpdateSliderValue;
+                    break;
+            }
+
+            InitializeSlider();
         }
 
-        _slider.onValueChanged.RemoveListener(OnSliderValueChanged);
+        private void InitializeSlider()
+        {
+            float initialValue = GetCurrentVolume();
+
+            _slider.SetValueWithoutNotify(initialValue);
+            _slider.onValueChanged.AddListener(OnSliderValueChanged);
+        }
+
+        private void UpdateSliderValue(float newValue) => _slider.SetValueWithoutNotify(newValue);
+
+
+        private void OnSliderValueChanged(float value)
+        {
+            Debug.Log($"OnSliderValueChanged: {_volumeType} = {value}");
+
+            switch (_volumeType)
+            {
+                case VolumeType.Master:
+                    _settingsManager.SetMasterVolume(value);
+                    break;
+                case VolumeType.Music:
+                    _settingsManager.SetMusicVolume(value);
+                    break;
+                case VolumeType.SFX:
+                    _settingsManager.SetSFXVolume(value);
+                    break;
+            }
+        }
+
+        private float GetCurrentVolume()
+        {
+            return _volumeType switch
+            {
+                VolumeType.Master => _settingsManager.CurrentSettings.masterVolume,
+                VolumeType.Music => _settingsManager.CurrentSettings.musicVolume,
+                VolumeType.SFX => _settingsManager.CurrentSettings.sfxVolume,
+                _ => 1f
+            };
+        }
+
+        private void OnEnable()
+        {
+            switch (_volumeType)
+            {
+                case VolumeType.Master:
+                    _settingsManager.OnMasterVolumeChanged += UpdateSliderValue;
+                    break;
+                case VolumeType.Music:
+                    _settingsManager.OnMusicVolumeChanged += UpdateSliderValue;
+                    break;
+                case VolumeType.SFX:
+                    _settingsManager.OnSFXVolumeChanged += UpdateSliderValue;
+                    break;
+            }
+        }
+
+        private void OnDisable()
+        {
+            switch (_volumeType)
+            {
+                case VolumeType.Master:
+                    _settingsManager.OnMasterVolumeChanged -= UpdateSliderValue;
+                    break;
+                case VolumeType.Music:
+                    _settingsManager.OnMusicVolumeChanged -= UpdateSliderValue;
+                    break;
+                case VolumeType.SFX:
+                    _settingsManager.OnSFXVolumeChanged -= UpdateSliderValue;
+                    break;
+            }
+
+            _slider.onValueChanged.RemoveListener(OnSliderValueChanged);
+        }
+
+        private void OnDestroy()
+        {
+            switch (_volumeType)
+            {
+                case VolumeType.Master:
+                    _settingsManager.OnMasterVolumeChanged -= UpdateSliderValue;
+                    break;
+                case VolumeType.Music:
+                    _settingsManager.OnMusicVolumeChanged -= UpdateSliderValue;
+                    break;
+                case VolumeType.SFX:
+                    _settingsManager.OnSFXVolumeChanged -= UpdateSliderValue;
+                    break;
+            }
+
+            _slider.onValueChanged.RemoveListener(OnSliderValueChanged);
+        }
     }
 }

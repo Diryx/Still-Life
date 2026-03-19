@@ -8,10 +8,10 @@ public class GameStart : MonoBehaviour
     [SerializeField] private Ease _fadeEase;
 
     private CanvasGroup _canvasGroupPanel;
-    private AudioManager _audioManager;
+    private Infrastructure.Controllers.AudioManager _audioManager;
 
     [Inject]
-    private void Construct(AudioManager audioManager) => _audioManager = audioManager;
+    private void Construct(Infrastructure.Controllers.AudioManager audioManager) => _audioManager = audioManager;
 
     private void Awake()
     {
